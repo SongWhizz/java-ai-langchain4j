@@ -25,10 +25,12 @@ public class LLMTest {
 
     @Autowired
     private OpenAiChatModel openAiChatModel;
+    // LangChain4j支持接入的大模型：https://docs.langchain4j.dev/integrations/language-models/
+
 
     @Test
     public void testSpringBoot(){
-        String answer = openAiChatModel.chat("who am I?");
+        String answer = openAiChatModel.chat("你是谁?");
         System.out.println(answer);
     }
 
