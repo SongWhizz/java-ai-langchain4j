@@ -1,5 +1,6 @@
 package com.gxust.java.ai.langchain4j;
 
+import dev.langchain4j.community.model.dashscope.QwenChatModel;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,6 @@ public class LLMTest {
     private OpenAiChatModel openAiChatModel;
     // LangChain4j支持接入的大模型：https://docs.langchain4j.dev/integrations/language-models/
 
-
     @Test
     public void testSpringBoot(){
         String answer = openAiChatModel.chat("你是谁?");
@@ -41,6 +41,15 @@ public class LLMTest {
     @Test
     public void testOllama(){
         String answer = ollamaChatModel.chat("你是何物？");
+        System.out.println(answer);
+    }
+
+    @Autowired
+    private QwenChatModel qwenChatModel;
+
+    @Test
+    public void testDashScopeQwen(){
+        String answer = qwenChatModel.chat("你好，你是谁？");
         System.out.println(answer);
     }
 
