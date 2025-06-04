@@ -9,3 +9,4 @@ public class XiaozhiApp {
         SpringApplication.run(XiaozhiApp.class, args);
     }
 }
+
