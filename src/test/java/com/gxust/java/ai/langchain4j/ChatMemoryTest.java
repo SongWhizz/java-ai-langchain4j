@@ -1,6 +1,7 @@
 package com.gxust.java.ai.langchain4j;
 
 import com.gxust.java.ai.langchain4j.assistant.Assistant;
+import com.gxust.java.ai.langchain4j.assistant.MemoryChatAssistant;
 import dev.langchain4j.community.model.dashscope.QwenChatModel;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.UserMessage;
@@ -66,6 +67,19 @@ public class ChatMemoryTest {
         String answer1 = assitant.chat("我是嵩");
         System.out.println(answer1);
         String answer2 = assitant.chat("我是谁？");
+        System.out.println(answer2);
+    }
+
+
+    @Autowired
+    private MemoryChatAssistant memoryChatAssistant;
+    @Test
+    public void testChatMemory4(){
+
+        // 调用memoryChatAssistant的接口
+        String answer1 = memoryChatAssistant.chat("我是嵩");
+        System.out.println(answer1);
+        String answer2 = memoryChatAssistant.chat("我是谁？");
         System.out.println(answer2);
     }
 
