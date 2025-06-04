@@ -92,7 +92,7 @@ public class ChatMemoryTest {
     public void testChatMemory5(){
 
         // 调用memoryChatAssistant的接口
-        String answer1 = separateChatAssistant.chat(1, "我是嵩");
+        String answer1 = separateChatAssistant.chat(1, "我是hansong");
         System.out.println(answer1);
 
         String answer2 = separateChatAssistant.chat(1, "我是谁？");
