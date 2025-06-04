@@ -87,6 +87,7 @@ public class ChatMemoryTest {
 
     @Autowired
     private SeparateChatAssistant separateChatAssistant;
+
     @Test
     public void testChatMemory5(){
 
