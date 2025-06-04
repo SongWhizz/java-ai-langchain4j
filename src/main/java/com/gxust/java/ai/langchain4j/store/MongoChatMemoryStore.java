@@ -1,5 +1,6 @@
 package com.gxust.java.ai.langchain4j.store;
 
+
 import com.gxust.java.ai.langchain4j.bean.ChatMessages;
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.ChatMessageDeserializer;
@@ -20,31 +21,28 @@ public class MongoChatMemoryStore implements ChatMemoryStore {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+
     @Override
     public List<ChatMessage> getMessages(Object memoryId) {
         Criteria criteria = Criteria.where("memoryId").is(memoryId);
         Query query = new Query(criteria);
-
         ChatMessages chatMessages = mongoTemplate.findOne(query, ChatMessages.class);
-        if (chatMessages == null){
-            return new LinkedList<>();
-        }
-
-        String contentJson = chatMessages.getContent();
-        return ChatMessageDeserializer.messagesFromJson(contentJson);
+        if(chatMessages == null) return new LinkedList<>();
+        return ChatMessageDeserializer.messagesFromJson(chatMessages.getContent());
     }
 
+
     @Override
-    public void updateMessages(Object memoryId, List<ChatMessage> list) {
+    public void updateMessages(Object memoryId, List<ChatMessage> messages) {
         Criteria criteria = Criteria.where("memoryId").is(memoryId);
         Query query = new Query(criteria);
         Update update = new Update();
+        update.set("content", ChatMessageSerializer.messagesToJson(messages));
 
-        update.set("content", list);
-
-        // 修改或新增
-        mongoTemplate.upsert(query, update, ChatMessageSerializer.messagesToJson(list));
+        //根据query条件能查询出文档，则修改文档；否则新增文档
+        mongoTemplate.upsert(query, update, ChatMessages.class);
     }
+
 
     @Override
     public void deleteMessages(Object memoryId) {
