@@ -1,0 +1,58 @@
+# web服务访问端口
+server:
+  port: 8080
+
+# ollama
+langchain4j:
+  ollama:
+    chat-model:
+      base-url: http://localhost:11434
+      api-key: ${DEEP_SEEK_API_KEY}
+      model-name: deepseek-r1:1.5b
+      log-requests: true
+      log-responses: true
+
+  # 阿里百炼平台
+  community:
+    dashscope:
+      chat-model:
+        api-key: ${DASH_SCOPE_API_KEY}
+        model-name: qwen-max
+      embedding-model:
+        api-key: ${DASH_SCOPE_API_KEY}
+        model-name: text-embedding-v3
+      streaming-chat-model:
+        api-key: ${DASH_SCOPE_API_KEY}
+        model-name: qwen-plus
+
+  # DeepSeek
+  open-ai:
+    chat-model:
+      baseurl: https://api.deepseek.com
+      api-key: ${DEEP_SEEK_API_KEY}
+      model-name: deepseek-chat
+      log-requests: true
+      log-responses: true
+
+# 日志级别
+logging:
+  level:
+    root: info
+
+# 基本数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/kedaxiaozhi?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: abc123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 开启 SQL 日志打印
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  # MongoDB连接配置
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/chat_memory_db
